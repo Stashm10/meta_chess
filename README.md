@@ -16,7 +16,7 @@ Run it locally:
 ```
 Then open http://localhost:8800/docs/. The play page is `docs/play.html`.
 
-Publish it with GitHub Pages: repository Settings → Pages → Build and deployment → Deploy from a branch → `main`, folder `/docs`. The site is then at `https://<user>.github.io/<repo>/`.
+Published with GitHub Pages from the repository root (Settings → Pages → Deploy from a branch → `main`, `/ (root)`). The root `index.html` forwards to `docs/`, so the site is at `https://<user>.github.io/<repo>/docs/`.
 
 Check the website's vision against a recording (frames plus New game / End presses), in a browser on the local server:
 `http://localhost:8800/tools/web/replay.html?rec=recordings/20261108-131527`

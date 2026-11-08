@@ -12,7 +12,7 @@ import WebKit
 @Observable
 @MainActor
 final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
-  static let defaultAddress = "https://stashm10.github.io/meta_chess/play.html"
+  static let defaultAddress = "https://stashm10.github.io/meta_chess/docs/play.html"
 
   /// The play page. Changeable under Details, e.g. to a Mac running the site locally.
   var address: String {
