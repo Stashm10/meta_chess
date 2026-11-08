@@ -6,7 +6,7 @@
 
 import { loadOpenCV, BoardReader } from "./vision.js";
 import { GameSession, STATUS } from "./game.js";
-import { Engine, Speaker } from "./engine.js";
+import { Engine, Speaker } from "./engine.js?v=2";
 import { squareIndex } from "./tracker.js";
 
 const $ = (id) => document.getElementById(id);
@@ -284,6 +284,12 @@ session.onChange = () => {
   renderQueued = true;
   requestAnimationFrame(() => { renderQueued = false; render(); });
 };
+
+if (!glassesMode) {
+  const unlock = () => speaker.unlock();
+  document.addEventListener("pointerdown", unlock, { once: true, capture: true });
+  document.addEventListener("keydown", unlock, { once: true, capture: true });
+}
 
 const wire = (id, fn) => $(id).addEventListener("click", () => { fn(); render(); });
 wire("btn-camera", () => startCamera());

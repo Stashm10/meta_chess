@@ -89,7 +89,17 @@ export class Speaker {
     if (!this.enabled || !("speechSynthesis" in window)) return;
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
-    speechSynthesis.cancel();
+    if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
+    this.current = u;  // Safari can drop an utterance that nothing references
+    speechSynthesis.speak(u);
+  }
+
+  // iOS only lets a page speak after it has spoken from a tap. Call this from the first tap.
+  unlock() {
+    if (this.unlocked || !("speechSynthesis" in window)) return;
+    this.unlocked = true;
+    const u = new SpeechSynthesisUtterance(" ");
+    u.volume = 0;
     speechSynthesis.speak(u);
   }
 }
