@@ -12,8 +12,13 @@ Software, in whole or in part, without the prior written permission of
 KnightSide. Public visibility of this repository does not grant any such
 rights.
 
-Permitted without further permission: using the official KnightSide website
-for personal, non-commercial use, and linking to it.
+Permitted without further permission:
+- using the official KnightSide website for personal, non-commercial use, and
+  linking to it;
+- building the KnightSide iPhone app from this repository and installing it on
+  your own devices for personal, non-commercial use, following the official
+  installation guide. You may change only what signing requires (the team and
+  bundle identifier). You may not distribute the app or any build of it.
 
 Third-party components included in this repository (for example under
 docs/vendor/) are NOT covered by this license. Each remains under its own

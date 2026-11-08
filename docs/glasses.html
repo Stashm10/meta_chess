@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install for Meta glasses · KnightSide</title>
+<meta name="description" content="How to install the KnightSide iPhone app for Ray-Ban Meta glasses.">
+<meta name="copyright" content="© 2026 KnightSide. All rights reserved.">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="stylesheet" href="css/site.css?v=2">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/icon-64.png" alt="">KnightSide</a>
+    <nav>
+      <a href="./#how">How it works</a>
+      <a class="btn primary small" href="play.html">Try it</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap guide">
+  <h1>Install KnightSide for Ray-Ban Meta glasses</h1>
+  <p class="lead">The glasses app isn't on the App Store yet, so for now you build it onto your own iPhone with Xcode.
+  It takes about 20 minutes the first time and costs nothing.</p>
+
+  <nav class="toc card">
+    <ol>
+      <li><a href="#need">What you need</a></li>
+      <li><a href="#glasses">Prepare the glasses</a></li>
+      <li><a href="#code">Get the code</a></li>
+      <li><a href="#sign">Sign the app with your Apple ID</a></li>
+      <li><a href="#install">Install it on your iPhone</a></li>
+      <li><a href="#play">Connect and play</a></li>
+      <li><a href="#trouble">If something goes wrong</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="need"><span class="step">1</span>What you need</h2>
+  <ul>
+    <li><b>Ray-Ban Meta glasses</b>, paired with the <a href="https://apps.apple.com/app/meta-ai/id1558240027">Meta AI app</a> on your iPhone.</li>
+    <li>An <b>iPhone</b> with iOS 17.2 or later, and a cable to connect it to the Mac.</li>
+    <li>A <b>Mac</b> with <a href="https://apps.apple.com/app/xcode/id497799835">Xcode</a> (free on the Mac App Store, about 10 GB).</li>
+    <li>A free <b>Apple ID</b>. A paid developer account isn't needed.</li>
+    <li>A green-and-white chessboard, like the standard roll-up tournament boards.</li>
+  </ul>
+  <p>You only need the Mac for installing. During a game, everything runs on the iPhone.</p>
+
+  <h2 id="glasses"><span class="step">2</span>Prepare the glasses</h2>
+  <ol>
+    <li>In the Meta AI app, update the app and the glasses' firmware.</li>
+    <li>Turn on <b>Developer Mode</b> for the glasses: in the Meta AI app, open <b>Settings → App Info</b> and tap the version number 5 times.
+      This lets apps that aren't on the App Store use the glasses' camera.</li>
+  </ol>
+
+  <h2 id="code"><span class="step">3</span>Get the code</h2>
+  <p>Open <b>Terminal</b> on the Mac and run:</p>
+  <div class="code"><pre><code>git clone https://github.com/Stashm10/meta_chess.git</code></pre><button class="copy" type="button">Copy</button></div>
+  <div class="code"><pre><code>open meta_chess/ios/MetaChess/MetaChess.xcodeproj</code></pre><button class="copy" type="button">Copy</button></div>
+  <p class="sub">No Git? <a href="https://github.com/Stashm10/meta_chess/archive/refs/heads/main.zip">Download the ZIP</a>, unzip it,
+  and double-click <code>ios/MetaChess/MetaChess.xcodeproj</code>. The first time, Xcode downloads Meta's glasses toolkit; wait until it finishes.</p>
+
+  <h2 id="sign"><span class="step">4</span>Sign the app with your Apple ID</h2>
+  <ol>
+    <li>In Xcode, open <b>Xcode → Settings → Apple Accounts</b> (called Accounts in older versions) and sign in with your Apple ID.</li>
+    <li>In the left sidebar, click the blue <b>MetaChess</b> project, then the <b>MetaChess</b> target, then <b>Signing &amp; Capabilities</b>.</li>
+    <li>Set <b>Team</b> to <b>Your Name (Personal Team)</b>.</li>
+    <li>Change <b>Bundle Identifier</b> to something only you use, for example <code>com.yourname.knightside</code>.
+      Each Apple ID needs its own, so the original one won't work for you.</li>
+  </ol>
+
+  <h2 id="install"><span class="step">5</span>Install it on your iPhone</h2>
+  <ol>
+    <li>Connect the iPhone to the Mac with the cable, unlock it, and tap <b>Trust</b> if asked.</li>
+    <li>On the iPhone, turn on <b>Settings → Privacy &amp; Security → Developer Mode</b>. The iPhone restarts.
+      (The option appears only after the iPhone has been connected to Xcode once.)</li>
+    <li>In Xcode, choose your iPhone at the top of the window, then press <b>▶ Run</b> (or <kbd>⌘</kbd> <kbd>R</kbd>).</li>
+    <li>The first time, the iPhone won't open the app yet. Go to <b>Settings → General → VPN &amp; Device Management</b>,
+      tap your Apple ID under Developer App, and tap <b>Trust</b>. Then open <b>KnightSide</b> from the home screen.</li>
+  </ol>
+  <div class="card note">
+    <span class="tag">Every 7 days</span>
+    <p>With a free Apple ID, the app stops opening after 7 days. Connect the iPhone and press ▶ Run in Xcode again; it takes a minute.</p>
+  </div>
+
+  <h2 id="play"><span class="step">6</span>Connect and play</h2>
+  <ol>
+    <li>Open KnightSide and tap <b>Connect glasses</b>. The Meta AI app opens; allow KnightSide, and you're sent back. You only do this once.</li>
+    <li>Sit at the board with the glasses on, and tap <b>Start</b>. The chip turns green: <b>Camera on</b>.</li>
+    <li>Set up the starting position, tap <b>New game</b>, and look at the whole board for about 3 seconds.
+      KnightSide learns your board and works out which side you play.</li>
+    <li>Play. On your turn, the best move is spoken quietly in the glasses, for example “Knight to f3”. Tap <b>Repeat</b> to hear it again.</li>
+    <li>Tap <b>Pocket</b> to black out the screen and save battery, then put the phone away. Tap the screen to wake it.</li>
+  </ol>
+  <p class="sub">The app needs an internet connection: it loads the same play page as this website and runs it on the phone.</p>
+
+  <h2 id="trouble"><span class="step">7</span>If something goes wrong</h2>
+  <dl class="faq">
+    <dt>Xcode says “Failed to register bundle identifier”</dt>
+    <dd>Someone already uses that Bundle Identifier. Change it to something more personal and press ▶ again.</dd>
+    <dt>“Untrusted Developer” on the iPhone</dt>
+    <dd>Trust your Apple ID under Settings → General → VPN &amp; Device Management (step 5).</dd>
+    <dt>The chip says “Update needed”</dt>
+    <dd>Tap <b>Update glasses</b> and update the firmware in the Meta AI app.</dd>
+    <dt>The chip stays on “Not found” or “Starting…”</dt>
+    <dd>Check that the glasses are on, connected in the Meta AI app, and that Developer Mode is on (step 2). Then tap Stop and Start.</dd>
+    <dt>It never says “Ready” after New game</dt>
+    <dd>Look at the whole board from a bit higher, with even light, and make sure the pieces are in the starting position.</dd>
+    <dt>No voice in the glasses</dt>
+    <dd>Tap ⓘ → <b>Test voice</b>. If you hear nothing, check that the glasses are the phone's audio output in Control Center, and turn the volume up.</dd>
+    <dt>“Couldn't load KnightSide”</dt>
+    <dd>Check the phone's internet connection and tap <b>Try again</b>.</dd>
+  </dl>
+  <p class="sub">Building the app is allowed for your own personal, non-commercial use only. See <a href="legal.html">Terms &amp; copyright</a>.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 KnightSide. All rights reserved.</span>
+    <span><a href="legal.html">Terms &amp; copyright</a> · <a href="legal.html#credits">Credits &amp; open-source licenses</a></span>
+  </div>
+</footer>
+<script>
+  for (const button of document.querySelectorAll(".copy")) {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.previousElementSibling.textContent);
+        button.textContent = "Copied";
+      } catch {
+        button.textContent = "Select and copy";
+      }
+      setTimeout(() => { button.textContent = "Copy"; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>

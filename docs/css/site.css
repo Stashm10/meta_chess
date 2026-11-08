@@ -100,3 +100,25 @@ section.block > .wrap > h2 { font-size: 28px; letter-spacing: -0.01em; }
 .legal { max-width: 760px; }
 .legal h2 { margin-top: 1.6em; font-size: 22px; }
 .legal pre { white-space: pre-wrap; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-size: 13px; }
+
+/* ---------- install guide ---------- */
+
+.guide { max-width: 760px; }
+.guide h1 { margin-top: 36px; font-size: clamp(28px, 4.5vw, 40px); letter-spacing: -0.02em; }
+.guide .lead { font-size: 18px; color: var(--muted); }
+.guide h2 { display: flex; align-items: center; gap: 12px; margin-top: 2em; font-size: 24px; scroll-margin-top: 76px; }
+.guide h2 .step { margin: 0; flex: none; }
+.guide ol, .guide ul { padding-left: 22px; }
+.guide li { margin: 6px 0; }
+.guide .card { margin: 16px 0; }
+.toc ol { margin: 0; columns: 2; column-gap: 32px; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+.guide code { font: 14px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: #eaf0f5; border-radius: 6px; padding: 1px 6px; }
+.code { position: relative; margin: 10px 0; }
+.code pre { margin: 0; background: var(--navy); color: #e8f1ff; border-radius: 10px; padding: 14px 92px 14px 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code pre code { background: none; padding: 0; color: inherit; font-size: 14px; }
+.copy { position: absolute; top: 8px; right: 8px; min-height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); color: #fff; font: inherit; font-size: 13px; font-weight: 650; cursor: pointer; }
+.copy:hover { background: rgba(255,255,255,0.2); }
+kbd { font: 13px ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--card); }
+.faq dt { font-weight: 700; color: var(--navy); margin-top: 14px; }
+.faq dd { margin: 4px 0 0; color: var(--text); }

@@ -24,6 +24,8 @@ Check the website's vision against a recording (frames plus New game / End press
 Supported boards: green-and-white roll-up tournament boards. Wooden boards aren't supported yet.
 
 ## iPhone app
+Full installation guide: https://stashm10.github.io/meta_chess/docs/glasses.html
+
 Setup (once):
 1. Install Xcode and sign in under Xcode → Settings → Apple Accounts.
 2. In the Meta AI app: update the app and glasses firmware, and turn on Developer Mode (Settings → App Info → tap the version number 5 times).
