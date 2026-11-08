@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KnightSide</title>
+<meta name="description" content="KnightSide watches your real chessboard through a camera and quietly says the best move.">
+<meta name="copyright" content="© 2026 KnightSide. All rights reserved.">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta property="og:title" content="KnightSide">
+<meta property="og:description" content="Your real chessboard, read live. The best move, spoken quietly.">
+<meta property="og:image" content="img/logo-white-bg.png">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/icon-64.png" alt="">KnightSide</a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#glasses">Glasses</a>
+      <a class="btn primary small" href="play.html">Try it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <img class="logo" src="img/logo.png" alt="KnightSide logo: glasses with a knight in one lens and an arrow in the other" width="1200" height="411">
+      <h1>Your real chessboard, read live.</h1>
+      <p class="lead">KnightSide watches a physical chess game through a camera, follows every move, and quietly says the best move when it's your turn.</p>
+      <div class="cta">
+        <a class="btn primary big" href="play.html">Try it with your webcam</a>
+        <a class="btn big" href="#glasses">Using Ray-Ban Meta glasses?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="sub">No markers, no setup photos, no account.</p>
+      <div class="grid3">
+        <div class="card">
+          <div class="step">1</div>
+          <h3>Point a camera at the board</h3>
+          <p>Put your laptop or webcam on your side of the board, looking across it, so all 64 squares are in view.</p>
+        </div>
+        <div class="card">
+          <div class="step">2</div>
+          <h3>Start from the opening position</h3>
+          <p>Press <b>New game</b> and hold still for about three seconds. KnightSide learns your board and lighting, and works out which side you play.</p>
+        </div>
+        <div class="card">
+          <div class="step">3</div>
+          <h3>Play</h3>
+          <p>Every move is followed live. On your turn, the best move is shown and spoken, for example “Knight to f3”.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>What you need</h2>
+      <div class="grid2">
+        <div class="card">
+          <ul>
+            <li>A <b>green-and-white board</b>, like the standard roll-up tournament boards. Wooden boards aren't supported yet.</li>
+            <li>A standard chess set with light and dark pieces.</li>
+            <li>A computer with a webcam, and a recent Chrome, Edge, Safari or Firefox.</li>
+            <li>Good, even light. Avoid strong shadows across the board.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Private by design</span>
+          <p>Everything runs in your browser: the board reading and the Stockfish chess engine. Your camera video never leaves your device, and nothing is stored.</p>
+          <p class="sub">The first visit downloads about 20 MB (the vision library and the engine). After that it loads from your browser's cache.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="glasses">
+    <div class="wrap">
+      <h2>Hands-free with Ray-Ban Meta glasses</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag">iPhone app</span>
+          <p>With the KnightSide iPhone app, the glasses' camera sees the board from your own eyes, and the best move is spoken quietly in the glasses. Nobody else hears it.</p>
+          <p>The app runs the same engine as this website, entirely on the phone. No computer needed.</p>
+        </div>
+        <div class="card note">
+          <span class="tag">Availability</span>
+          <p>The glasses app isn't on the App Store yet. Websites can't use the glasses' camera; only phone apps can, through Meta's toolkit. Until the app is published, the webcam version on this site is the way to try KnightSide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Play fair</h2>
+      <p>KnightSide is made for casual games, learning and fun with friends who know you're using it. Don't use it in rated games, tournaments or online play, where engine help is cheating.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 KnightSide. All rights reserved.</span>
+    <span><a href="legal.html">Terms &amp; copyright</a> · <a href="legal.html#credits">Credits &amp; open-source licenses</a></span>
+  </div>
+</footer>
+</body>
+</html>

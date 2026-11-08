@@ -1,10 +1,12 @@
+// KnightSide — © 2026 KnightSide. All rights reserved.
+
 import MWDATCore
 import SwiftUI
 
 @main
 struct MetaChessApp: App {
   @State private var glasses: GlassesLink
-  @State private var mac = MacLink()
+  @State private var web = WebLink()
 
   init() {
     do {
@@ -17,8 +19,8 @@ struct MetaChessApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView(glasses: glasses, mac: mac)
-        .onAppear { glasses.onFrame = { image in mac.offer(image) } }
+      ContentView(glasses: glasses, web: web)
+        .onAppear { glasses.onFrame = { image in web.push(image) } }
         .onOpenURL { url in
           // Meta AI calls back here after registration and permission prompts.
           guard

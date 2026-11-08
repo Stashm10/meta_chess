@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KnightSide replay check</title>
+<style>body{font:14px/1.4 ui-monospace,monospace;margin:16px;background:#fff;color:#111}pre{white-space:pre-wrap}</style>
+</head>
+<body>
+<p>Replays a recording (frames + New game / End presses) through the website's vision and tracker.
+Usage: <code>/tools/web/replay.html?rec=recordings/20261108-131527&amp;from=0&amp;to=99999</code></p>
+<div id="progress"></div>
+<pre id="log"></pre>
+<script type="module">
+import { loadOpenCV, BoardReader } from "/docs/js/vision.js";
+import { GameSession } from "/docs/js/game.js";
+
+const q = new URLSearchParams(location.search);
+const rec = q.get("rec") || "recordings/20261108-131527";
+const from = Number(q.get("from") || 0), to = Number(q.get("to") || 1e9);
+const out = document.getElementById("log");
+const log = (s) => { out.textContent += s + "\n"; };
+window.replayDone = false;
+window.replayLog = [];
+
+const cv = await loadOpenCV("/docs/vendor/opencv/opencv.js");
+const events = (await (await fetch(`/${rec}/events.jsonl`)).text()).trim().split("\n").map((l) => JSON.parse(l));
+const controls = new Map();
+for (const e of events) if (e.kind === "new_game" || e.kind === "end") {
+  const k = e.frame + 1;
+  controls.set(k, [...(controls.get(k) || []), e.kind]);
+}
+const frames = events.filter((e) => e.kind === "frame" && e.frame >= from && e.frame <= to).map((e) => e.frame);
+
+const reader = new BoardReader();
+const session = new GameSession({ bestMove: async () => null }, { say() {}, repeat() {}, lastText: null });
+session.listeners.push((k, d) => reader.onEvent(k, d));
+let idx = 0;
+const note = (s) => { log(s); window.replayLog.push(s); };
+session.listeners.push((k, d) => {
+  if (k === "lock") note(`  f${idx} lock ${d.userColor}`);
+  if (k === "move") note(`  f${idx} move ${session.tracker.chess.history().slice(-2).join(" ")}`);
+});
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d", { willReadFrequently: true });
+const t0 = performance.now();
+for (idx of frames) {
+  for (const c of controls.get(idx) || []) {
+    if (c === "new_game") session.newGame(); else session.endGame();
+    note(`f${idx} ${c}`);
+  }
+  const img = new Image();
+  img.src = `/${rec}/frames/${String(idx).padStart(6, "0")}.jpg`;
+  await img.decode();
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  ctx.drawImage(img, 0, 0);
+  const rgba = cv.matFromImageData(ctx.getImageData(0, 0, canvas.width, canvas.height));
+  const bgr = new cv.Mat();
+  cv.cvtColor(rgba, bgr, cv.COLOR_RGBA2BGR);
+  rgba.delete();
+  const r = reader.read(bgr);
+  bgr.delete();
+  if (r) session.observe(r.probs, r.confidence, r.userColor); else session.observeNoBoard();
+  if (q.get("verbose")) note(`f${idx} ${reader.note}`);
+  document.getElementById("progress").textContent = `frame ${idx} · ${((performance.now() - t0) / 1000).toFixed(0)} s`;
+}
+note(`moves: ${session.tracker ? session.tracker.chess.history().join(" ") : ""}`);
+note(`ms/frame: ${((performance.now() - t0) / frames.length).toFixed(0)}`);
+window.replayDone = true;
+</script>
+</body>
+</html>

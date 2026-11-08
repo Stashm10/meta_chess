@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Play · KnightSide</title>
+<meta name="copyright" content="© 2026 KnightSide. All rights reserved.">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/play.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/icon-64.png" alt="">KnightSide</a>
+    <nav>
+      <span id="status" class="pill" data-status="idle">Ready</span>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap play">
+  <section class="panel camera-panel">
+    <div class="camera" id="camera-box">
+      <video id="video" playsinline muted></video>
+      <img id="still" alt="" hidden>
+      <canvas id="overlay"></canvas>
+      <div id="camera-empty" class="camera-empty">
+        <p id="camera-msg">Turn on your camera and point it across the board from your side.</p>
+        <button id="btn-camera" class="btn primary big">Turn on camera</button>
+      </div>
+    </div>
+    <div class="camera-bar">
+      <select id="camera-select" title="Camera" hidden></select>
+      <span id="vision-note" class="muted small"></span>
+    </div>
+  </section>
+
+  <section class="panel side">
+    <div id="headline" class="headline">Turn on the camera to start</div>
+    <div id="hint" class="hint" hidden></div>
+    <div id="color" class="muted"></div>
+
+    <div class="best-box">
+      <div class="label">Best move</div>
+      <div id="best" class="best">—</div>
+      <div id="spoken" class="muted small"></div>
+    </div>
+
+    <div class="controls">
+      <button id="btn-new" class="btn primary" disabled>New game</button>
+      <select id="new-color" title="Your color">
+        <option value="">Detect my color</option>
+        <option value="w">I'm White</option>
+        <option value="b">I'm Black</option>
+      </select>
+    </div>
+    <div class="controls">
+      <button id="btn-repeat" class="btn small" disabled>Repeat</button>
+      <button id="btn-undo" class="btn small" disabled>Undo</button>
+      <button id="btn-recal" class="btn small" disabled>Recalibrate</button>
+      <button id="btn-end" class="btn small" disabled>End</button>
+      <label class="check"><input id="voice" type="checkbox" checked> Speak</label>
+    </div>
+
+    <div id="board" class="board" aria-label="Current position"></div>
+    <div class="label">Moves</div>
+    <ol id="moves" class="moves"></ol>
+    <div id="loading" class="muted small"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 KnightSide. All rights reserved.</span>
+    <span><a href="./">Home</a> · <a href="legal.html">Terms &amp; copyright</a> · <a href="legal.html#credits">Credits</a></span>
+  </div>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
