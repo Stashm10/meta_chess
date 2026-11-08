@@ -1,4 +1,4 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 //
 // The vision step: camera frame -> per-square [empty, white, black] probabilities.
 //

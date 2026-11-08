@@ -1,4 +1,4 @@
-/* KnightSide — © 2026 KnightSide. All rights reserved. */
+/* KnightSight — © 2026 KnightSight. All rights reserved. */
 
 .play { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, 1fr); gap: 20px; padding-top: 20px; align-items: start; }
 @media (max-width: 900px) { .play { grid-template-columns: 1fr; } }

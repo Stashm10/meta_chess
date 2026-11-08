@@ -1,4 +1,4 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 
 import AVFoundation
 import Observation
@@ -6,7 +6,7 @@ import SwiftUI
 import UIKit
 import WebKit
 
-/// Hosts the KnightSide play page and feeds it glasses frames. The page does all the work
+/// Hosts the KnightSight play page and feeds it glasses frames. The page does all the work
 /// (board reading, move tracking, Stockfish) on the phone; phrases come back to be spoken here,
 /// so they play in the glasses.
 @Observable
@@ -37,7 +37,7 @@ final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
     config.mediaTypesRequiringUserActionForPlayback = []
     webView = WKWebView(frame: .zero, configuration: config)
     super.init()
-    config.userContentController.add(WeakHandler(self), name: "knightside")
+    config.userContentController.add(WeakHandler(self), name: "knightsight")
     webView.navigationDelegate = self
     webView.isInspectable = true
     webView.scrollView.contentInsetAdjustmentBehavior = .never
@@ -68,13 +68,13 @@ final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
       defer { inFlight = false }
       // Waits for the page to finish reading the frame, so frames never queue up.
       _ = try? await webView.callAsyncJavaScript(
-        "return await window.KnightSide.pushFrame(frame)", arguments: ["frame": frame], contentWorld: .page)
+        "return await window.KnightSight.pushFrame(frame)", arguments: ["frame": frame], contentWorld: .page)
       framesSent += 1
     }
   }
 
   func command(_ name: String) {
-    webView.evaluateJavaScript("window.KnightSide.command('\(name)')")
+    webView.evaluateJavaScript("window.KnightSight.command('\(name)')")
   }
 
   func testVoice() { speak("Knight to f3") }
@@ -100,11 +100,11 @@ final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-    self.error = "Couldn't load KnightSide: \(error.localizedDescription)"
+    self.error = "Couldn't load KnightSight: \(error.localizedDescription)"
   }
 
   func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-    self.error = "Couldn't load KnightSide: \(error.localizedDescription)"
+    self.error = "Couldn't load KnightSight: \(error.localizedDescription)"
   }
 }
 

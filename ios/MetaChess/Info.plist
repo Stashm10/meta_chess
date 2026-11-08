@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>KnightSide</string>
+	<string>KnightSight</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -61,7 +61,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Needed to connect to your Meta glasses.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Connects to your glasses over Wi-Fi, and to a KnightSide page on your own network if you set one.</string>
+	<string>Connects to your glasses over Wi-Fi, and to a KnightSight page on your own network if you set one.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_bonjour._tcp</string>

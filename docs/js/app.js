@@ -1,19 +1,19 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 //
 // The play page: camera -> board reader -> game session -> board, best move and voice.
-// In the KnightSide iPhone app (?source=glasses) the frames come from the glasses instead
+// In the KnightSight iPhone app (?source=glasses) the frames come from the glasses instead
 // of a webcam, and phrases are spoken by the app so they play in the glasses.
 
 import { loadOpenCV, BoardReader } from "./vision.js";
 import { GameSession, STATUS } from "./game.js";
-import { Engine, Speaker } from "./engine.js?v=2";
+import { Engine, Speaker } from "./engine.js?v=3";
 import { squareIndex } from "./tracker.js";
 
 const $ = (id) => document.getElementById(id);
 const FRAME_MS = 333;              // three frames a second is enough to follow a game
 const MAX_SIDE = 1280;
 const params = new URLSearchParams(location.search);
-const native = window.webkit?.messageHandlers?.knightside;
+const native = window.webkit?.messageHandlers?.knightsight;
 const glassesMode = params.get("source") === "glasses" && !!native;
 
 const engine = new Engine();
@@ -136,7 +136,7 @@ setInterval(() => {
 }, FRAME_MS);
 
 /** Glasses frames from the iPhone app, as JPEG data URLs. */
-window.KnightSide = {
+window.KnightSight = {
   async pushFrame(dataUrl) {
     if (busy || !reader) return false;
     const img = $("still");

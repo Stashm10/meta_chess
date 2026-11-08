@@ -1,10 +1,10 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 
 import MWDATCamera
 import MWDATCore
 import SwiftUI
 
-/// The KnightSide play page (board, best move, moves) with the glasses controls under it.
+/// The KnightSight play page (board, best move, moves) with the glasses controls under it.
 struct ContentView: View {
   let glasses: GlassesLink
   @Bindable var web: WebLink
@@ -47,7 +47,7 @@ struct ContentView: View {
         .padding(12)
         .background(.bar)
       }
-      .navigationTitle("KnightSide")
+      .navigationTitle("KnightSight")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         Button { showDetails = true } label: { Image(systemName: "info.circle") }
@@ -62,7 +62,7 @@ struct ContentView: View {
         Color.black
           .ignoresSafeArea()
           .overlay(alignment: .bottom) {
-            Text("KnightSide is watching. Tap to wake.")
+            Text("KnightSight is watching. Tap to wake.")
               .font(.footnote)
               .foregroundStyle(.white.opacity(0.25))
               .padding(.bottom, 40)
@@ -175,7 +175,7 @@ struct DetailsView: View {
             web.load()
           }
         } header: {
-          Text("KnightSide page")
+          Text("KnightSight page")
         } footer: {
           Text("The board reading and Stockfish run on this phone, inside the page.")
         }
@@ -186,7 +186,7 @@ struct DetailsView: View {
           }
         }
         Section {
-          Text("© 2026 KnightSide. All rights reserved.").font(.footnote).foregroundStyle(.secondary)
+          Text("© 2026 KnightSight. All rights reserved.").font(.footnote).foregroundStyle(.secondary)
         }
       }
       .navigationTitle("Details")

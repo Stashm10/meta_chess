@@ -1,4 +1,4 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 //
 // Game session: turns per-frame vision output into spoken best moves.
 // Vision calls observe() with 64 rows of [empty, white, black]; everything else here

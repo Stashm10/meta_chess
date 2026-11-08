@@ -1,12 +1,12 @@
-# KnightSide
+# KnightSight
 
-Real-time best chess move detection: KnightSide watches a physical chessboard through a camera, follows every move, and quietly says the best move on your turn.
+Real-time best chess move detection: KnightSight watches a physical chessboard through a camera, follows every move, and quietly says the best move on your turn.
 
-© 2026 KnightSide. All rights reserved. This code is proprietary; see [LICENSE](LICENSE). Third-party components keep their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+© 2026 KnightSight. All rights reserved. This code is proprietary; see [LICENSE](LICENSE). Third-party components keep their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## What's here
 - **Website** (`docs/`): the welcome page and the play page. Everything runs in the browser: board reading with OpenCV.js, move tracking with chess.js, and Stockfish 18 (WebAssembly). Works with any computer's webcam. Camera video never leaves the device.
-- **iPhone app** (`ios/MetaChess`, shown as "KnightSide"): streams the Ray-Ban Meta glasses camera into the same play page, running on the phone, and speaks the best move into the glasses. No computer needed. Pocket mode blacks out the screen to save battery.
+- **iPhone app** (`ios/MetaChess`, shown as "KnightSight"): streams the Ray-Ban Meta glasses camera into the same play page, running on the phone, and speaks the best move into the glasses. No computer needed. Pocket mode blacks out the screen to save battery.
 - **Python backend** (`backend/`): the original Mac version and the reference implementation. Used for development: tests, recordings and replays.
 
 ## Website

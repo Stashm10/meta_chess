@@ -1,6 +1,6 @@
 # Third-party notices
 
-KnightSide's own code is proprietary (see `LICENSE`). These components are included unmodified and stay under their own licenses.
+KnightSight's own code is proprietary (see `LICENSE`). These components are included unmodified and stay under their own licenses.
 
 | Component | Version | Where | License | Source |
 |---|---|---|---|---|
@@ -9,6 +9,6 @@ KnightSide's own code is proprietary (see `LICENSE`). These components are inclu
 | chess.js | 1.4.0 | `docs/vendor/chess/` | BSD-2-Clause, text in `docs/vendor/chess/LICENSE.txt` | https://github.com/jhlywa/chess.js |
 | Meta Wearables Device Access Toolkit | 1.0.1 (Swift package, fetched by Xcode) | iPhone app | Meta's license terms | https://github.com/facebook/meta-wearables-dat-ios |
 
-Stockfish runs as a separate program (a Web Worker in the browser) and KnightSide talks to it over the UCI protocol. Its complete source code is available at the links above.
+Stockfish runs as a separate program (a Web Worker in the browser) and KnightSight talks to it over the UCI protocol. Its complete source code is available at the links above.
 
 The Python backend under `backend/` (a development and testing tool) uses python-chess (GPL-3.0), OpenCV (Apache-2.0), NumPy and scikit-learn (BSD-3-Clause), FastAPI and Uvicorn (MIT/BSD), installed separately from `requirements.txt` and not distributed in this repository.

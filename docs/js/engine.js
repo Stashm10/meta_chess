@@ -1,4 +1,4 @@
-// KnightSide — © 2026 KnightSide. All rights reserved.
+// KnightSight — © 2026 KnightSight. All rights reserved.
 //
 // Stockfish 18 (lite, single-threaded WebAssembly) in a Web Worker, spoken to over UCI.
 // Searches are short and capped, so a casual game costs little battery or CPU.
