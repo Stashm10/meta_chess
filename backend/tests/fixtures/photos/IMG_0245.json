@@ -1,0 +1,7 @@
+{
+  "source": "iphone",
+  "position": "start",
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "near_side": "white",
+  "notes": "Kingside knight and bishop swapped on f1/g1 (occupancy unaffected). Board on a bed, not flat."
+}
