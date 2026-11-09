@@ -74,7 +74,10 @@ struct ContentView: View {
     // The page stops when the phone locks, so keep the screen on while running.
     .onChange(of: glasses.isRunning) { _, on in
       UIApplication.shared.isIdleTimerDisabled = on
-      if !on { setPocket(false) }
+      if !on {
+        setPocket(false)
+        web.command("stop")
+      }
     }
   }
 

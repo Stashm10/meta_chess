@@ -71,7 +71,10 @@ async function startCamera(deviceId) {
   const video = $("video");
   video.srcObject = stream;
   await video.play();
+  // The camera can also go away by itself (unplugged, or taken by another app).
+  stream.getVideoTracks()[0]?.addEventListener("ended", () => turnOffCamera("The camera stopped. Turn it on again to continue."));
   $("camera-empty").hidden = true;
+  $("btn-camera-off").hidden = false;
   await listCameras(stream.getVideoTracks()[0]?.getSettings().deviceId);
   run(true);
 }
@@ -79,6 +82,18 @@ async function startCamera(deviceId) {
 function stopCamera() {
   if (stream) stream.getTracks().forEach((t) => t.stop());
   stream = null;
+}
+
+/** Stop reading frames and show the start screen again. The game itself is kept. */
+function turnOffCamera(message) {
+  stopCamera();
+  $("video").srcObject = null;
+  $("still").hidden = true;
+  $("overlay").width = 0;
+  $("btn-camera-off").hidden = true;
+  $("camera-msg").textContent = message;
+  $("camera-empty").hidden = false;
+  run(false);
 }
 
 async function listCameras(current) {
@@ -139,10 +154,17 @@ setInterval(() => {
 window.KnightSight = {
   async pushFrame(dataUrl) {
     if (busy || !reader) return false;
-    const img = $("still");
+    const img = new Image();
     img.src = dataUrl;
     await img.decode();
-    img.hidden = false;
+    // Drawn onto a canvas, so the previous frame stays on screen until the new one is ready.
+    const still = $("still");
+    if (still.width !== img.naturalWidth || still.height !== img.naturalHeight) {
+      still.width = img.naturalWidth;
+      still.height = img.naturalHeight;
+    }
+    still.getContext("2d").drawImage(img, 0, 0);
+    still.hidden = false;
     $("camera-empty").hidden = true;
     if (!running) await run(true);
     processDrawable(img, img.naturalWidth, img.naturalHeight);
@@ -276,6 +298,8 @@ const commands = {
   undo: () => session.undo(),
   recalibrate: () => session.recalibrate(),
   end: () => session.endGame(),
+  // From the iPhone app when the glasses camera is stopped.
+  stop: () => turnOffCamera("The glasses camera is off. Press Start in the app to continue."),
 };
 // The engine answers later than the frame that asked, so re-render on every session change.
 let renderQueued = false;
@@ -293,6 +317,7 @@ if (!glassesMode) {
 
 const wire = (id, fn) => $(id).addEventListener("click", () => { fn(); render(); });
 wire("btn-camera", () => startCamera());
+wire("btn-camera-off", () => turnOffCamera("Camera off. Turn it on again to continue."));
 wire("btn-new", commands.newGame);
 wire("btn-repeat", commands.repeat);
 wire("btn-undo", commands.undo);

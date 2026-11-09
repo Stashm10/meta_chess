@@ -18,6 +18,8 @@ final class GlassesLink {
   var frameSize: CGSize?
   var preview: UIImage?
   var message: String?
+  /// True from Start until Stop, or until the glasses end the session or the stream.
+  private(set) var isRunning = false
 
   /// Called on the main actor with at most a few frames per second.
   @ObservationIgnored var onFrame: ((UIImage) -> Void)?
@@ -31,6 +33,7 @@ final class GlassesLink {
   @ObservationIgnored private var compatibilityTokens: [AnyListenerToken] = []
   @ObservationIgnored private var tasks: [Task<Void, Never>] = []
   @ObservationIgnored private var lastFrameAt: Date?
+  @ObservationIgnored private var hasStreamed = false
   /// Frames arrive off the main actor at the stream rate; only every ~1/3 s one is decoded and forwarded.
   @ObservationIgnored private nonisolated let gate = OSAllocatedUnfairLock(initialState: Date.distantPast)
   nonisolated static let forwardInterval: TimeInterval = 1.0 / 3.0
@@ -48,7 +51,6 @@ final class GlassesLink {
   }
 
   var isRegistered: Bool { registration == .registered }
-  var isRunning: Bool { session != nil }
 
   // MARK: - Registration
 
@@ -101,6 +103,7 @@ final class GlassesLink {
     do throws(DeviceSessionError) {
       let newSession = try wearables.createSession(deviceSelector: selector)
       session = newSession
+      isRunning = true
       newSession.statePublisher.listen { [weak self] state in
         Task { @MainActor in self?.sessionChanged(state) }
       }.store(in: sessionTokens)
@@ -115,9 +118,13 @@ final class GlassesLink {
     }
   }
 
+  /// Stops at once, without waiting for the glasses to confirm, so Start is available again right away.
   func stop() {
     camera?.stop()
     session?.stop()
+    cleanupStream()
+    cleanupSession()
+    sessionState = .stopped
   }
 
   private func sessionChanged(_ state: DeviceSessionState) {
@@ -170,10 +177,7 @@ final class GlassesLink {
 
   private func listen(to stream: MWDATCamera.Stream) {
     stream.statePublisher.listen { [weak self] state in
-      Task { @MainActor in
-        self?.streamState = state
-        if state == .stopped { self?.cleanupStream() }
-      }
+      Task { @MainActor in self?.streamChanged(state) }
     }.store(in: streamTokens)
 
     stream.errorPublisher.listen { [weak self] error in
@@ -193,6 +197,14 @@ final class GlassesLink {
     }.store(in: streamTokens)
   }
 
+  private func streamChanged(_ state: StreamState) {
+    streamState = state
+    if state == .streaming { hasStreamed = true }
+    // The stream ended on the glasses' side (taken off, or out of range): stop fully so Start works again.
+    // Only after it has streamed, so a .stopped reported while starting up doesn't cancel the start.
+    if state == .stopped && hasStreamed { stop() }
+  }
+
   private func frameArrived(_ image: UIImage?, at time: Date) {
     frames += 1
     if let last = lastFrameAt {
@@ -209,6 +221,7 @@ final class GlassesLink {
   private func cleanupStream() {
     streamTokens.clear()
     camera = nil
+    hasStreamed = false
     streamState = .stopped
     preview = nil
     fps = 0
@@ -218,6 +231,7 @@ final class GlassesLink {
   private func cleanupSession() {
     sessionTokens.clear()
     session = nil
+    isRunning = false
     if sessionState != .stopped { sessionState = .idle }
   }
 }

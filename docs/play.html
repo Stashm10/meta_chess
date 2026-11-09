@@ -7,7 +7,7 @@
 <meta name="copyright" content="© 2026 KnightSight. All rights reserved.">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
-<link rel="stylesheet" href="css/site.css?v=3">
+<link rel="stylesheet" href="css/site.css?v=4">
 <link rel="stylesheet" href="css/play.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
   <section class="panel camera-panel">
     <div class="camera" id="camera-box">
       <video id="video" playsinline muted></video>
-      <img id="still" alt="" hidden>
+      <canvas id="still" hidden></canvas>
       <canvas id="overlay"></canvas>
       <div id="camera-empty" class="camera-empty">
         <p id="camera-msg">Turn on your camera and point it across the board from your side.</p>
@@ -33,6 +33,7 @@
     </div>
     <div class="camera-bar">
       <select id="camera-select" title="Camera" hidden></select>
+      <button id="btn-camera-off" class="btn small" hidden>Turn off camera</button>
       <span id="vision-note" class="muted small"></span>
     </div>
   </section>
@@ -78,6 +79,6 @@
   </div>
 </footer>
 
-<script type="module" src="js/app.js?v=3"></script>
+<script type="module" src="js/app.js?v=4"></script>
 </body>
 </html>
