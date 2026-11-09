@@ -134,7 +134,7 @@ kbd { font: 13px ui-monospace, Menlo, monospace; border: 1px solid var(--line); 
 .demo { padding: 40px 0 24px; text-align: center; }
 .demo .sub { margin-top: 14px; }
 .demo-frame { position: relative; display: inline-block; max-width: 100%; border-radius: 22px; overflow: hidden; background: var(--navy); box-shadow: 0 2px 6px rgba(11, 31, 77, 0.1), 0 24px 60px rgba(11, 31, 77, 0.18); }
-.demo-frame video { display: block; max-width: 100%; max-height: 82svh; width: auto; height: auto; }
+.demo-frame video { display: block; max-width: 100%; max-height: min(82svh, 720px); width: auto; height: auto; }
 .demo-sound { position: absolute; right: 12px; bottom: 12px; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 0; background: rgba(11, 31, 77, 0.72); color: #fff; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; backdrop-filter: blur(6px); }
 .demo-sound:hover { background: rgba(11, 31, 77, 0.88); }
 
