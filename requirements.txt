@@ -1,6 +1,8 @@
-fastapi>=0.115
+fastapi>=0.116
+starlette>=0.47.2          # older versions have known denial-of-service bugs
 uvicorn[standard]>=0.30
-python-multipart>=0.0.9
+python-multipart>=0.0.18   # older versions have known denial-of-service bugs
+h11>=0.16                  # older versions allow request smuggling
 chess>=1.11
 numpy>=1.26
 opencv-python>=4.10

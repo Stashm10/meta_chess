@@ -21,6 +21,7 @@ from backend.bonjour import Advertiser
 from backend.capture.file_source import SourceError
 from backend.capture.manager import CaptureManager
 from backend.game.engine import Engine
+from backend.local_only import LocalOnly
 from backend.loop import GameSession
 
 STATIC_DIR = Path(__file__).parent / "static"
@@ -114,6 +115,7 @@ def create_app(
             session.speaker.stop()
 
     app = FastAPI(title="Meta Chess", lifespan=lifespan)
+    app.add_middleware(LocalOnly)
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
     def session(request: Request) -> GameSession:

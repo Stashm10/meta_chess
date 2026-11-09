@@ -40,8 +40,9 @@ In the app: **Connect glasses** (once), then **Start**, then **New game** and lo
 uv venv --python 3.12 .venv
 uv pip install --python .venv -r requirements.txt
 .venv/bin/pytest -q
-.venv/bin/uvicorn backend.app:app --host 0.0.0.0 --port 8000
+.venv/bin/uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
+This keeps the server on your Mac. It has no passwords: use `--host 0.0.0.0` (reachable from other devices) only on a Wi-Fi network you trust, such as your home network.
 Stockfish for the backend: put a binary at `bin/stockfish` (gitignored) or on `PATH`, or set `STOCKFISH_PATH`.
 
 Specs and design notes: `.plans/`.

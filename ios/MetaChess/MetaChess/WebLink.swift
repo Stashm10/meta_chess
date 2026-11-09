@@ -39,7 +39,9 @@ final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
     super.init()
     config.userContentController.add(WeakHandler(self), name: "knightsight")
     webView.navigationDelegate = self
+    #if DEBUG
     webView.isInspectable = true
+    #endif
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     load()
   }
@@ -97,6 +99,19 @@ final class WebLink: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
       bestMove = body["best"] as? String
     default: break
     }
+  }
+
+  /// Only the KnightSight site loads in the app: the page can talk to the app (speech, state),
+  /// so links to anywhere else open in Safari instead.
+  func webView(_ webView: WKWebView, decidePolicyFor action: WKNavigationAction) async -> WKNavigationActionPolicy {
+    guard let url = action.request.url else { return .cancel }
+    if url.scheme == "about" || (url.host != nil && url.host == URL(string: address)?.host) {
+      return .allow
+    }
+    if url.scheme == "http" || url.scheme == "https" {
+      await UIApplication.shared.open(url)
+    }
+    return .cancel
   }
 
   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

@@ -100,7 +100,8 @@ async function listCameras(current) {
   const cams = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === "videoinput");
   const sel = $("camera-select");
   sel.hidden = cams.length < 2;
-  sel.innerHTML = cams.map((c, i) => `<option value="${c.deviceId}">${c.label || `Camera ${i + 1}`}</option>`).join("");
+  // Built as elements, not HTML text: camera names come from the device and could contain markup.
+  sel.replaceChildren(...cams.map((c, i) => new Option(c.label || `Camera ${i + 1}`, c.deviceId)));
   if (current) sel.value = current;
 }
 

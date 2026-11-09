@@ -148,3 +148,33 @@ def test_capture_routes(tmp_path):
         assert client.get("/state").json()["spoken"] is None      # stub vision: silent
         assert client.post("/capture/stop").json()["running"] is False
         assert client.post("/record", json={"on": False}).json()["path"] is None
+
+
+# ---------- only this computer and the local network may use the server ----------
+
+@pytest.mark.parametrize("host", ["localhost:8000", "127.0.0.1:8000", "[::1]:8000", "192.168.1.20:8000",
+                                  "10.0.0.5", "romans-mac.local:8000", "testserver"])
+def test_local_hosts_are_allowed(client, host):
+    assert client.get("/health", headers={"host": host}).status_code == 200
+
+
+@pytest.mark.parametrize("host", ["evil.example.com", "rebind.attacker.net:8000", "8.8.8.8:8000"])
+def test_other_hosts_are_refused(client, host):
+    # A website that points its own domain at 127.0.0.1 (DNS rebinding) sends its own name as Host.
+    assert client.get("/camera.jpg", headers={"host": host}).status_code == 403
+
+
+def test_requests_from_other_websites_are_refused(client):
+    resp = client.post("/game/new", json={}, headers={"host": "localhost:8000", "origin": "https://evil.example.com"})
+    assert resp.status_code == 403
+    same = client.post("/game/new", json={}, headers={"host": "localhost:8000", "origin": "http://localhost:8000"})
+    assert same.status_code == 200
+
+
+def test_websocket_from_other_websites_is_refused(client):
+    from starlette.websockets import WebSocketDisconnect
+    with pytest.raises(WebSocketDisconnect):
+        with client.websocket_connect("/ws", headers={"origin": "https://evil.example.com"}) as ws:
+            ws.receive_json()
+    with client.websocket_connect("/ws", headers={"origin": "http://testserver"}) as ws:
+        assert "status" in ws.receive_json()
