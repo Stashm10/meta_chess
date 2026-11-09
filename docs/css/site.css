@@ -123,3 +123,24 @@ section.block > .wrap > h2 { font-size: 28px; letter-spacing: -0.01em; }
 kbd { font: 13px ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--card); }
 .faq dt { font-weight: 700; color: var(--navy); margin-top: 14px; }
 .faq dd { margin: 4px 0 0; color: var(--text); }
+
+/* ---------- welcome: first screen and demo video ---------- */
+
+.hero { min-height: calc(100svh - 60px); display: flex; flex-direction: column; justify-content: center; position: relative; padding-bottom: 72px; }
+.scroll-cue { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none; }
+.scroll-cue span { font-size: 20px; animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+.demo { padding: 40px 0 24px; text-align: center; }
+.demo .sub { margin-top: 14px; }
+.demo-frame { position: relative; display: inline-block; max-width: 100%; border-radius: 22px; overflow: hidden; background: var(--navy); box-shadow: 0 2px 6px rgba(11, 31, 77, 0.1), 0 24px 60px rgba(11, 31, 77, 0.18); }
+.demo-frame video { display: block; max-width: 100%; max-height: 82svh; width: auto; height: auto; }
+.demo-sound { position: absolute; right: 12px; bottom: 12px; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 0; background: rgba(11, 31, 77, 0.72); color: #fff; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; backdrop-filter: blur(6px); }
+.demo-sound:hover { background: rgba(11, 31, 77, 0.88); }
+
+.js-reveal .reveal { opacity: 0; transform: translateY(32px) scale(0.98); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js-reveal .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-cue span { animation: none; }
+}

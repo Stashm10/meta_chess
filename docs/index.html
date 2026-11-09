@@ -11,7 +11,7 @@
 <meta property="og:title" content="KnightSight">
 <meta property="og:description" content="Your real chessboard, read live. The best move, spoken quietly.">
 <meta property="og:image" content="img/logo-white-bg.png">
-<link rel="stylesheet" href="css/site.css?v=4">
+<link rel="stylesheet" href="css/site.css?v=5">
 </head>
 <body>
 <header class="top">
@@ -35,6 +35,18 @@
         <a class="btn primary big" href="play.html">Try it with your webcam</a>
         <a class="btn big" href="#glasses">Using Ray-Ban Meta glasses?</a>
       </div>
+    </div>
+    <a class="scroll-cue" href="#demo" aria-label="See it in action">See it in action<span aria-hidden="true">↓</span></a>
+  </section>
+
+  <!-- Demo video. Put the file at docs/video/demo.mp4; the section hides itself if it's missing. -->
+  <section class="demo" id="demo">
+    <div class="wrap reveal">
+      <div class="demo-frame">
+        <video id="demo-video" src="video/demo.mp4" poster="video/demo-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <button id="demo-sound" class="demo-sound" type="button" aria-pressed="false">Sound on</button>
+      </div>
+      <p class="sub">A real game. The voice is what KnightSight says in the glasses.</p>
     </div>
   </section>
 
@@ -115,5 +127,39 @@
     <span><a href="legal.html">Terms &amp; copyright</a> · <a href="legal.html#credits">Credits &amp; open-source licenses</a></span>
   </div>
 </footer>
+<script>
+  // The demo fades in when scrolled to, plays only while on screen, and starts muted
+  // (browsers block sound until the visitor asks for it).
+  (() => {
+    const section = document.getElementById("demo");
+    const video = document.getElementById("demo-video");
+    const sound = document.getElementById("demo-sound");
+    video.addEventListener("error", () => {
+      section.hidden = true;
+      document.querySelector(".scroll-cue").hidden = true;
+    });
+    sound.addEventListener("click", () => {
+      video.muted = !video.muted;
+      if (!video.muted) video.play();
+      sound.textContent = video.muted ? "Sound on" : "Sound off";
+      sound.setAttribute("aria-pressed", String(!video.muted));
+    });
+    if (!("IntersectionObserver" in window)) {
+      section.querySelector(".reveal").classList.add("in");
+      return;
+    }
+    document.documentElement.classList.add("js-reveal");
+    new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.querySelector(".reveal").classList.add("in");
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      }
+    }, { threshold: 0.35 }).observe(section);
+  })();
+</script>
 </body>
 </html>
