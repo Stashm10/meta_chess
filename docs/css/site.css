@@ -145,3 +145,4 @@ kbd { font: 13px ui-monospace, Menlo, monospace; border: 1px solid var(--line); 
   .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
   .scroll-cue span { animation: none; }
 }
+.demo-sound .ico { width: 20px; height: 20px; flex: none; }

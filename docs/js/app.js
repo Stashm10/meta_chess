@@ -192,7 +192,8 @@ function drawGrid(w, h) {
 
 // ---------- rendering ----------
 
-const GLYPHS = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
+// U+FE0E asks for the plain text glyph; without it some phones draw the pawn as an emoji.
+const GLYPHS = { k: "♚\uFE0E", q: "♛\uFE0E", r: "♜\uFE0E", b: "♝\uFE0E", n: "♞\uFE0E", p: "♟\uFE0E" };
 
 function headline(s) {
   if (!running) return glassesMode ? "Waiting for the glasses" : "Turn on the camera to start";

@@ -11,7 +11,7 @@
 <meta property="og:title" content="KnightSight">
 <meta property="og:description" content="Your real chessboard, read live. The best move, spoken quietly.">
 <meta property="og:image" content="img/logo-white-bg.png">
-<link rel="stylesheet" href="css/site.css?v=6">
+<link rel="stylesheet" href="css/site.css?v=7">
 </head>
 <body>
 <header class="top">
@@ -44,7 +44,7 @@
     <div class="wrap reveal">
       <div class="demo-frame">
         <video id="demo-video" src="video/demo.mp4" poster="video/demo-poster.jpg" muted loop playsinline preload="metadata"></video>
-        <button id="demo-sound" class="demo-sound" type="button" aria-pressed="false"><span aria-hidden="true">🔊</span> Tap for sound</button>
+        <button id="demo-sound" class="demo-sound" type="button" aria-pressed="false"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Tap for sound</button>
       </div>
       <p class="sub">A real game. The voice is what KnightSight says in the glasses.</p>
     </div>
@@ -146,7 +146,7 @@
         video.currentTime = 0;
         video.play().catch(() => {});
       }
-      sound.innerHTML = video.muted ? '<span aria-hidden="true">🔊</span> Tap for sound' : '<span aria-hidden="true">🔇</span> Mute';
+      sound.innerHTML = video.muted ? `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Tap for sound` : `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mute`;
       sound.setAttribute("aria-pressed", String(!video.muted));
       sound.classList.toggle("on", !video.muted);
     };
