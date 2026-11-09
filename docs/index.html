@@ -11,7 +11,7 @@
 <meta property="og:title" content="KnightSight">
 <meta property="og:description" content="Your real chessboard, read live. The best move, spoken quietly.">
 <meta property="og:image" content="img/logo-white-bg.png">
-<link rel="stylesheet" href="css/site.css?v=5">
+<link rel="stylesheet" href="css/site.css?v=6">
 </head>
 <body>
 <header class="top">
@@ -44,7 +44,7 @@
     <div class="wrap reveal">
       <div class="demo-frame">
         <video id="demo-video" src="video/demo.mp4" poster="video/demo-poster.jpg" muted loop playsinline preload="metadata"></video>
-        <button id="demo-sound" class="demo-sound" type="button" aria-pressed="false">Sound on</button>
+        <button id="demo-sound" class="demo-sound" type="button" aria-pressed="false"><span aria-hidden="true">🔊</span> Tap for sound</button>
       </div>
       <p class="sub">A real game. The voice is what KnightSight says in the glasses.</p>
     </div>
@@ -138,12 +138,20 @@
       section.hidden = true;
       document.querySelector(".scroll-cue").hidden = true;
     });
-    sound.addEventListener("click", () => {
+    // Tapping the button or the video toggles sound. Turning it on restarts the video,
+    // so the first spoken move comes right away instead of after a silent stretch.
+    const toggleSound = () => {
       video.muted = !video.muted;
-      if (!video.muted) video.play();
-      sound.textContent = video.muted ? "Sound on" : "Sound off";
+      if (!video.muted) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+      sound.innerHTML = video.muted ? '<span aria-hidden="true">🔊</span> Tap for sound' : '<span aria-hidden="true">🔇</span> Mute';
       sound.setAttribute("aria-pressed", String(!video.muted));
-    });
+      sound.classList.toggle("on", !video.muted);
+    };
+    sound.addEventListener("click", (e) => { e.stopPropagation(); toggleSound(); });
+    video.addEventListener("click", toggleSound);
     if (!("IntersectionObserver" in window)) {
       section.querySelector(".reveal").classList.add("in");
       return;

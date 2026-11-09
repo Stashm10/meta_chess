@@ -135,8 +135,9 @@ kbd { font: 13px ui-monospace, Menlo, monospace; border: 1px solid var(--line); 
 .demo .sub { margin-top: 14px; }
 .demo-frame { position: relative; display: inline-block; max-width: 100%; border-radius: 22px; overflow: hidden; background: var(--navy); box-shadow: 0 2px 6px rgba(11, 31, 77, 0.1), 0 24px 60px rgba(11, 31, 77, 0.18); }
 .demo-frame video { display: block; max-width: 100%; max-height: min(82svh, 720px); width: auto; height: auto; }
-.demo-sound { position: absolute; right: 12px; bottom: 12px; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 0; background: rgba(11, 31, 77, 0.72); color: #fff; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; backdrop-filter: blur(6px); }
-.demo-sound:hover { background: rgba(11, 31, 77, 0.88); }
+.demo-sound { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--blue); color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(21, 70, 255, 0.4); white-space: nowrap; }
+.demo-sound.on { left: auto; right: 12px; transform: none; min-height: 36px; padding: 0 14px; font-size: 14px; background: rgba(11, 31, 77, 0.72); box-shadow: none; backdrop-filter: blur(6px); }
+.demo-frame video { cursor: pointer; }
 
 .js-reveal .reveal { opacity: 0; transform: translateY(32px) scale(0.98); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .js-reveal .reveal.in { opacity: 1; transform: none; }
